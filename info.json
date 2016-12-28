@@ -1,0 +1,14 @@
+[
+  {"name":"椅子","imageName":"0.jpg","prize":"0"},
+  {"name":"白菜","imageName":"1.jpg","prize":"0"},
+  {"name":"豹子","imageName":"2.jpg","prize":"0"},
+  {"name":"背心","imageName":"3.jpg","prize":"0"},
+  {"name":"蝙蝠","imageName":"4.jpg","prize":"0"},
+  {"name":"冰箱","imageName":"5.jpg","prize":"0"},
+  {"name":"菠萝","imageName":"6.jpg","prize":"0"},
+  {"name":"布鞋","imageName":"7.jpg","prize":"0"},
+  {"name":"苍蝇","imageName":"8.jpg","prize":"0"},
+  {"name":"草莓","imageName":"9.jpg","prize":"0"},
+  {"name":"铲车","imageName":"10.jpg","prize":"0"},
+  {"name":"衬衫","imageName":"11.jpg","prize":"0"}
+]
