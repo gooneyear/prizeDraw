@@ -104,9 +104,10 @@ $(function(){
             'top': windowH/2-320,
             'left': windowW/2-120,
             'transform': 'scale(1.6)',
-            'box-shadow': '0 0 30px white',
+            'box-shadow': '0 0 60px red',
             'border-radius': '15px',
-            'display': 'block'
+            'display': 'block',
+            'Opacity': '0.9'
           });
           $("#main").css("background-image", "url('image/back2.jpg')");
           $(".showWord").html("恭喜<span style='color:red;font-size:96px;'>"+prizeName+"</span>中奖！");
@@ -125,9 +126,12 @@ $(function(){
   // 显示开始
   function showGo(){
     $("#main").css({
-      "height": windowH-280,
+      "height": windowH-240,
       "width": windowW-40,
       "background-image": "url('image/back2.jpg')"
+    });
+    $("#foot img:last").css({
+      'margin-left': windowW/2
     });
     $("#start").css("height","200px");
     $("#start").css("width",windowW);
@@ -140,7 +144,7 @@ $(function(){
   function showEnd(){
     $("#stop").css("height","200px");
     $("#stop").css("width",windowW);
-    $("#main").css("background-image", "url('image/back.jpg')");
+    $("#main").css("background-image", "url('image/back1.jpg')");
     $("#start").hide();
     $(".showWord").hide();
     $("#stop").show();
@@ -153,10 +157,10 @@ $(function(){
       arrayPic = json;
       actionPic(json,first);
     //});
-    $("#main").css("background-image", "url('image/back.jpg')");
+    $("#main").css("background-image", "url('image/back1.jpg')");
     $(".go").css({
       'margin-left': windowW/2-80,
-      'margin-top': '60px'
+      'margin-top': '50px'
     })
   }
 

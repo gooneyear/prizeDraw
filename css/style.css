@@ -43,9 +43,21 @@ body { font-size: 100%; margin: 0; font-family: 'Helvetica Neue', Arial, sans-se
   left: 0;
   z-index: 1000;
 }
-
 .picture img {
   width:240px;
   height:160px;
+  border-radius: 10px;
+  Opacity: 0.8;
+}
+
+#foot {
   position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+#foot img {
+  height: 200px;
+  margin-left: 20px;
 }
