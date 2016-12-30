@@ -1,44 +1,38 @@
-html { margin: 0; padding: 0; }
-body { font-size: 100%; margin: 0; padding: 1.75em; font-family: 'Helvetica Neue', Arial, sans-serif; }
-ul,li{list-style:none;padding:0;margin:0;}
-h1 { font-size: 1.75em; margin: 0 0 0.6em 0; }
-h2 { font-size: 1.25em; margin: 0 0 0.6em 0; }
-
-a { color: #2996cc; }
-a:hover { text-decoration: none; }
-
-p { line-height: 1.5em; }
-.small { color: #666; font-size: 0.875em; }
-.large { font-size: 1.25em; }
+html,ul,li { margin: 0; padding: 0; }
+body { font-size: 100%; margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }
 
 #main {
   position: relative;
-  width: 100%;
-  box-shadow: 0 0 15px darkred;
-  border: solid 1px #6a3484;
+  margin: 20px;
+  box-shadow: 0 0 10px darkred;
+  border-radius: 5px;
 }
-.start {
+
+.showWord {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  display: flex;
+  font-size: 72px;
+  font-weight: bold;
+  color: #4d0000;
+  z-index: 1009;
+}
+
+.start {
   Opacity: 0.6;
-  background-color: #777;
   z-index: 1002;
 }
 .go {
-  margin-left: 40%;
   margin-top: 50px;
   font-size: 60px;
   font-weight: bold;
-  border: solid 1px green;
+  border-radius: 10px;
+  box-shadow: 0 0 5px red;
   width: 200px;
   height: 100px;
   color: #4d0000;
   cursor: pointer;
 }
 .go:hover{
-  background-color: #0f7864;
+  background-color: #fff;
 }
 .picture {
   position: absolute;
