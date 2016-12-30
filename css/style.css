@@ -13,6 +13,9 @@ p { line-height: 1.5em; }
 
 #main {
   position: relative;
+  width: 100%;
+  box-shadow: 0 0 15px darkred;
+  border: solid 1px #6a3484;
 }
 .start {
   position: absolute;
