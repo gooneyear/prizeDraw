@@ -138,7 +138,7 @@ $(function(){
           } else {
             clearInterval(bigTimer);
           }
-        },20);
+        },25);
 
         // 中奖人员头像的金色闪动效果
         borderTimer = setInterval(function(){
@@ -214,12 +214,7 @@ $(function(){
       }
     }
   }
-
-  // 匀速运动效果
-  function showSport(){
-
-  }
-
+  
   // 停止并重置此前播放的音乐
   function pauseMusic(){
     $("audio").each(function(){
