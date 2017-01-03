@@ -6,10 +6,16 @@ $(function(){
   var windowW = $(document).width();
   var arrayPic = "";
   var timer = "";
+  var bigTimer = "";
+  var borderTimer = "";
+  var num = 0;
   var top = 0;
   var left = 0;
   var first = 1;
   var exist = true;
+  var maxWidth = 30;
+  var maxHeight = 20;
+  var shadow = 1;
   var json = [
     {"name":"书包","imageName":"0.jpg","prize":"0"},
     {"name":"椅子","imageName":"1.jpg","prize":"0"},
@@ -69,6 +75,7 @@ $(function(){
   // 点击结束，展示奖项
   $("#end").click(function(){
     clearInterval(timer);
+    clearInterval(bigTimer);
     pauseMusic();
     $("audio")[1].play();
     $(".showWord").html("");
@@ -94,21 +101,13 @@ $(function(){
       if (j != xx) {
         $("#img"+j).hide();
       } else {
+        clearInterval(borderTimer);
         arrayPic[j].prize = "1";
         $("#img"+j).hide();
-        var num = j;
+        num = j;
         prizeName = arrayPic[j].name;
         // 延迟1.6秒显示中奖人员头像和名字，以配合音效。
         setTimeout(function(){
-          $("#img"+num).css({
-            'top': windowH/2-320,
-            'left': windowW/2-120,
-            'transform': 'scale(1.6)',
-            'box-shadow': '0 0 60px red',
-            'border-radius': '15px',
-            'display': 'block',
-            'Opacity': '0.9'
-          });
           $("#main").css("background-image", "url('image/back2.jpg')");
           $(".showWord").html("恭喜<span style='color:red;font-size:96px;'>"+prizeName+"</span>中奖！");
           var wordWidth = $(".showWord").width();
@@ -118,6 +117,40 @@ $(function(){
             'display': 'block'
           });
         },1600);
+
+        // 中奖人员头像的显示动画
+        maxWidth  = 30;
+        maxHeight = 20;
+        bigTimer = setInterval(function(){
+          $("#img"+num).css({
+            'top': windowH/2-320+maxHeight*0.03,
+            'left': windowW/2-140+maxWidth*0.03,
+            'transform': 'scale(1.6)',
+            'border-radius': '15px',
+            'display': 'block',
+            'Opacity': '0.9',
+            'width': maxWidth,
+            'height': maxHeight
+          });
+          if(maxHeight < 150){
+            maxWidth = maxWidth*1.05;
+            maxHeight = maxHeight*1.05;
+          } else {
+            clearInterval(bigTimer);
+          }
+        },20);
+
+        // 中奖人员头像的金色闪动效果
+        borderTimer = setInterval(function(){
+          $("#img"+num).css({
+            'box-shadow': '0 0 '+shadow+'px Gold'
+          });
+          shadow += 1;
+          if (shadow > 100){
+            shadow = 1;
+          }
+        },10);
+
       }
     }
     showGo();
@@ -180,6 +213,11 @@ $(function(){
         });
       }
     }
+  }
+
+  // 匀速运动效果
+  function showSport(){
+
   }
 
   // 停止并重置此前播放的音乐
