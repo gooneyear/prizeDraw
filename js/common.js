@@ -4,6 +4,8 @@
 $(function(){
   var windowH = $(document).height();
   var windowW = $(document).width();
+  var prizeNum = 1;   // 奖项数目
+  var prizeArr = [];  // 中奖列表
   var arrayPic = "";
   var timer = "";
   var bigTimer = "";
@@ -16,46 +18,13 @@ $(function(){
   var maxWidth = 30;
   var maxHeight = 20;
   var shadow = 1;
-  var json = [
-    {"name":"书包","imageName":"0.jpg","prize":"0"},
-    {"name":"椅子","imageName":"1.jpg","prize":"0"},
-    {"name":"扑克","imageName":"2.jpg","prize":"0"},
-    {"name":"手臂","imageName":"3.jpg","prize":"0"},
-    {"name":"灯泡","imageName":"4.jpg","prize":"0"},
-    {"name":"兔子","imageName":"5.jpg","prize":"0"},
-    {"name":"日历","imageName":"6.jpg","prize":"0"},
-    {"name":"沙发","imageName":"7.jpg","prize":"0"},
-    {"name":"背心","imageName":"8.jpg","prize":"0"},
-    {"name":"地球","imageName":"9.jpg","prize":"0"},
-    {"name":"菠萝","imageName":"10.jpg","prize":"0"},
-    {"name":"火车","imageName":"11.jpg","prize":"0"},
-    {"name":"铅笔","imageName":"12.jpg","prize":"0"},
-    {"name":"斧头","imageName":"13.jpg","prize":"0"},
-    {"name":"蝴蝶","imageName":"14.jpg","prize":"0"},
-    {"name":"闹钟","imageName":"15.jpg","prize":"0"},
-    {"name":"禅师","imageName":"staff (1).jpg","prize":"0"},
-    {"name":"竹林","imageName":"staff (2).jpg","prize":"0"},
-    {"name":"香蕉","imageName":"staff (3).jpg","prize":"0"},
-    {"name":"吉他","imageName":"staff (4).jpg","prize":"0"},
-    {"name":"桌子","imageName":"staff (5).jpg","prize":"0"},
-    {"name":"轮胎","imageName":"staff (6).jpg","prize":"0"},
-    {"name":"算盘","imageName":"staff (7).jpg","prize":"0"},
-    {"name":"架子","imageName":"staff (8).jpg","prize":"0"},
-    {"name":"医生","imageName":"staff (9).jpg","prize":"0"},
-    {"name":"帽子","imageName":"staff (10).jpg","prize":"0"},
-    {"name":"蜻蜓","imageName":"staff (11).jpg","prize":"0"},
-    {"name":"大象","imageName":"staff (12).jpg","prize":"0"},
-    {"name":"山羊","imageName":"staff (13).jpg","prize":"0"},
-    {"name":"台灯","imageName":"staff (14).jpg","prize":"0"},
-    {"name":"红灯笼","imageName":"staff (15).jpg","prize":"0"},
-    {"name":"蘑菇","imageName":"staff (16).jpg","prize":"0"}
-  ];
 
   showGo();
   beginShowPic();
 
   // 点击开始抽奖
   $("#go").click(function(){
+    prizeNum = $("input:checked")[0].value;
     showEnd();
     pauseMusic();
     $("audio")[0].play();
@@ -188,7 +157,9 @@ $(function(){
     // chrome浏览器不支持AJAX获取本地文件，故改成定义数组方式，见上。
     //$.getJSON("image/info.json",function(json){
       arrayPic = json;
+      json.sort(randomsort);
       actionPic(json,first);
+    console.log(json);
     //});
     $("#main").css("background-image", "url('image/back1.jpg')");
     $(".go").css({
@@ -223,4 +194,8 @@ $(function(){
     });
   }
 
+  function randomsort(a, b) {
+    return Math.random()>.5 ? -1 : 1;
+    //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
+  }
 });

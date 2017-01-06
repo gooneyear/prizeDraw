@@ -11,12 +11,23 @@
       <div class="picture"></div>
       <p class="showWord"></p>
     </div>
-    <!--
+
     <div id="foot">
-      <img src="image/left.jpg">
-      <img src="image/right.jpg">
+      <form>
+        请选择中奖的人数：<br>
+        <label for="one">抽一个奖：</label>
+        <input type="radio" name="number" class="getNum" id="one" value="1" checked><br>
+        <label for="two">抽两个奖：</label>
+        <input type="radio" name="number" class="getNum" id="two" value="2"><br>
+        <label for="three">抽三个奖：</label>
+        <input type="radio" name="number" class="getNum" id="three" value="3"><br>
+        <label for="four">抽四个奖：</label>
+        <input type="radio" name="number" class="getNum" id="four" value="4"><br>
+        <label for="five">抽五个奖：</label>
+        <input type="radio" name="number" class="getNum" id="five" value="5">
+      </form>
     </div>
-    -->
+
     <div id="start" class="start">
       <button id="go" class="go">开始</button>
     </div>
@@ -27,6 +38,7 @@
     <audio id="backMusic" src="image/backMusic.wav" loop></audio>
     <audio id="getPrize" src="image/getPrize.wav"></audio>
     <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="js/staff.js" type="text/javascript"></script>
     <script src="js/common.js" type="text/javascript"></script>
   </body>
   </html>
