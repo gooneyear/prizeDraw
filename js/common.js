@@ -6,18 +6,10 @@ $(function(){
   var windowW = $(document).width();
   var prizeNum = 1;   // 奖项数目
   var prizeArr = [];  // 中奖列表
-  var arrayPic = "";
+  var arrayPic = "";  // 人员图片数组
   var timer = "";
-  var bigTimer = "";
-  var borderTimer = "";
-  var num = 0;
   var top = 0;
   var left = 0;
-  var first = 1;
-  var exist = true;
-  var maxWidth = 30;
-  var maxHeight = 20;
-  var shadow = 1;
 
   showGo();
   beginShowPic();
@@ -25,15 +17,16 @@ $(function(){
   // 点击开始抽奖
   $("#go").click(function(){
     prizeNum = $("input:checked")[0].value;
+    arrayPic.sort(randomsort);
     showEnd();
     pauseMusic();
     $("audio")[0].play();
     clearInterval(timer);
     for(var j=0; j<arrayPic.length; j++){
       if (arrayPic[j].prize != "1") {
-        $("#img"+j).show();
+        $("#img"+arrayPic[j].id).show();
       } else {
-        $("#img"+j).hide();
+        $("#img"+arrayPic[j].id).hide();
       }
     }
     timer = setInterval(function(){
@@ -44,84 +37,78 @@ $(function(){
   // 点击结束，展示奖项
   $("#end").click(function(){
     clearInterval(timer);
-    clearInterval(bigTimer);
     pauseMusic();
     $("audio")[1].play();
     $(".showWord").html("");
-    exist = true;
     var len = 0;
-    var prizeName = "";
-    // 判断当前随机抽取的人员是否中奖，若已中奖则自动重新抽取
-    while(exist){
-      var xx = Math.floor(Math.random()*arrayPic.length);
-      if (arrayPic[xx].prize == "0"){
-        exist = false;
+
+    // 判断当前随机抽取的人员是否中奖，若已中奖则自动向下获取
+    prizeArr = [];
+    for (var i=0; i<arrayPic.length; i++){
+      if (arrayPic[i].prize == "0"){
+        if (prizeArr.length == prizeNum){
+          break;
+        } else {
+          prizeArr.push(arrayPic[i]); 
+          arrayPic[i].prize = "1";
+        }
       } else {
         len ++;
         if (len == arrayPic.length){
-          exist = false;
           alert("全都中奖啦！刷新页面重新开始吧！");
         }
       }
     }
-
-    // 显示中奖人员头像
-    for(var j=0; j<arrayPic.length; j++){
-      if (j != xx) {
-        $("#img"+j).hide();
-      } else {
-        clearInterval(borderTimer);
-        arrayPic[j].prize = "1";
-        $("#img"+j).hide();
-        num = j;
-        prizeName = arrayPic[j].name;
-        // 延迟1.6秒显示中奖人员头像和名字，以配合音效。
-        setTimeout(function(){
-          $("#main").css("background-image", "url('image/back2.jpg')");
-          $(".showWord").html("恭喜<span style='color:red;font-size:96px;'>"+prizeName+"</span>中奖！");
-          var wordWidth = $(".showWord").width();
-          $(".showWord").css({
-            'top': windowH/2-100,
-            'left': windowW/2-wordWidth/2,
-            'display': 'block'
-          });
-        },1600);
-
-        // 中奖人员头像的显示动画
-        maxWidth  = 30;
-        maxHeight = 20;
-        bigTimer = setInterval(function(){
-          $("#img"+num).css({
-            'top': windowH/2-320+maxHeight*0.03,
-            'left': windowW/2-140+maxWidth*0.03,
-            'transform': 'scale(1.6)',
-            'border-radius': '15px',
-            'display': 'block',
-            'Opacity': '0.9',
-            'width': maxWidth,
-            'height': maxHeight
-          });
-          if(maxHeight < 150){
-            maxWidth = maxWidth*1.05;
-            maxHeight = maxHeight*1.05;
-          } else {
-            clearInterval(bigTimer);
-          }
-        },25);
-
-        // 中奖人员头像的金色闪动效果
-        borderTimer = setInterval(function(){
-          $("#img"+num).css({
-            'box-shadow': '0 0 '+shadow+'px Gold'
-          });
-          shadow += 1;
-          if (shadow > 100){
-            shadow = 1;
-          }
-        },10);
+    $("img").hide();
+    var prizeName = "";
+    switch (prizeNum){
+      case "5":
+        prizeName = "三等";
+        break;
+      case "2":
+        prizeName = "二等";
+        break;
+      case "1":
+        prizeName = "一等";
+        break;
+      default:
+        prizeName = "惊喜";
+        break;
+    }
+    prizeName = "";
+    // 中奖人员头像的显示动画延迟1.6秒
+    setTimeout(function(){
+      for (var i=0; i<prizeNum; i++) {
+        $("#img"+prizeArr[i].id).css({
+          'top': windowH/2-100,
+          'left':windowW/2 + (i-prizeNum/2)*140-10,
+          'border-radius': '15px',
+          'display': 'block',
+          'width': '120px',
+          'height': '80px',
+        }); 
 
       }
-    }
+      $(".showWord").html("恭喜中<span style='color:red;font-size:96px;'>"+prizeName+"</span>奖！");
+      var wordWidth = $(".showWord").width();
+      $(".showWord").css({
+        'top': windowH/2-100,
+        'left': windowW/2-wordWidth/2,
+        'display': 'block'
+      });
+    },1600);
+    
+    var getImgID = 0; 
+    if (prizeNum > 0){
+      for(var i=0; i<prizeNum; i++){
+        getImgID = prizeArr[i].id;        
+        $("#img"+getImgID).css({
+          'box-shadow': '0 0 100px Gold'
+        });          
+      }
+    } else {
+      alert("奖品真多，奖品数已超过未中奖人数啦！");
+    }        
     showGo();
   });
 
@@ -157,9 +144,8 @@ $(function(){
     // chrome浏览器不支持AJAX获取本地文件，故改成定义数组方式，见上。
     //$.getJSON("image/info.json",function(json){
       arrayPic = json;
-      json.sort(randomsort);
-      actionPic(json,first);
-    console.log(json);
+      arrayPic.sort(randomsort);
+      actionPic(arrayPic);
     //});
     $("#main").css("background-image", "url('image/back1.jpg')");
     $(".go").css({
@@ -169,15 +155,16 @@ $(function(){
   }
 
   // 图片随机洗牌效果
-  function actionPic(json,first){
+  function actionPic(json){
+    $(".picture").empty();
+    var imgID = 0;
     for(var i=0; i<json.length; i++){
+      imgID = json[i].id;
       if (json[i].prize != 1) {
         top = Math.random()*(windowH-450);
         left = Math.random()*(windowW-300);
-        if (first){
-          $(".picture").append("<img id='img"+i+"' src='./picture/"+json[i].imageName+"'>");
-        }
-        $("#img"+i).css({
+        $(".picture").append("<img id='img"+imgID+"' src='./picture/"+json[i].imageName+"'>");
+        $("#img"+imgID).css({
           'position': 'absolute',
           'top': top,
           'left': left

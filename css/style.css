@@ -13,7 +13,7 @@ body { font-size: 100%; margin: 0; font-family: 'Helvetica Neue', Arial, sans-se
 
 .showWord {
   position: absolute;
-  font-size: 72px;
+  font-size: 36px;
   font-weight: bold;
   color: #4d0000;
   z-index: 1009;
@@ -47,7 +47,7 @@ body { font-size: 100%; margin: 0; font-family: 'Helvetica Neue', Arial, sans-se
   width:240px;
   height:160px;
   border-radius: 10px;
-  Opacity: 0.8;
+  Opacity: 0.9;
 }
 
 #foot {
@@ -56,5 +56,6 @@ body { font-size: 100%; margin: 0; font-family: 'Helvetica Neue', Arial, sans-se
   bottom: 40px;
   z-index: 1;
   text-align: center;
+  font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
 }
 
