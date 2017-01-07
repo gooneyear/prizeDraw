@@ -117,7 +117,7 @@ $(function(){
     $("#main").css({
       "height": windowH-240,
       "width": windowW-40,
-      "background-image": "url('image/back2.jpg')"
+      "background-image": "url('image/back3.jpg')"
     });
     $("#foot img:last").css({
       'margin-left': windowW/2
