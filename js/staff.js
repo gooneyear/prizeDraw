@@ -50,5 +50,6 @@ var json = [
   {"name":"张学升","imageName":"张学升.jpg","prize":"0","id":"48"},
   {"name":"许成胜","imageName":"许成胜.jpg","prize":"0","id":"49"},
   {"name":"洪峰","imageName":"洪峰.jpg","prize":"0","id":"50"},
-  {"name":"别文进","imageName":"别文进.jpg","prize":"0","id":"51"}
+  {"name":"别文进","imageName":"别文进.jpg","prize":"0","id":"51"},
+  {"name":"高祥","imageName":"高祥.jpg","prize":"0","id":"52"}
 ];

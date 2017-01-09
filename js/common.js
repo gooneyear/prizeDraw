@@ -85,7 +85,7 @@ $(function(){
           'border-radius': '15px',
           'display': 'block',
           'width': '120px',
-          'height': '80px',
+          'height': '80px'
         }); 
 
       }
@@ -99,7 +99,7 @@ $(function(){
     },1600);
     
     var getImgID = 0; 
-    if (prizeNum > 0){
+    if (prizeArr.length >= prizeNum){
       for(var i=0; i<prizeNum; i++){
         getImgID = prizeArr[i].id;        
         $("#img"+getImgID).css({
